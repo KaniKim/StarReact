@@ -1,7 +1,7 @@
 import "./App.css";
 import BrandNav from "./components/hompage/NavBar";
 import AlertApplication from "./components/hompage/PartyAlert";
-import CarouselCard from "./components/hompage/scroll/CarouselCard";
+import InfiniteScroll from "./components/hompage/scroll/InfiniteScroll";
 
 function App() {
 
@@ -9,7 +9,7 @@ function App() {
     <>
       <BrandNav></BrandNav>
       <AlertApplication></AlertApplication>
-      <CarouselCard></CarouselCard>
+      <InfiniteScroll></InfiniteScroll>
     </>
   );
 }
