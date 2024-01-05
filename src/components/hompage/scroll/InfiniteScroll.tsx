@@ -1,7 +1,7 @@
-import { useState } from "react";
-import useIntersectionObserver from "../../../api/scroll";
+import { useEffect, useRef, useState } from "react";
 import CarouselCard from "./CarouselCard";
-import { Spinner } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
+import axios, { AxiosResponse } from "axios";
 
 interface MusicDataRequest {
     artistName: string;
@@ -18,55 +18,55 @@ interface MusicData {
 function InfiniteScroll() {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [itemIndex, setItemIndex] = useState<number>(0);
+  const itemIndex = useRef<number>(0);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [data, setData] = useState<MusicData[]>([]);
- 
-  const fetchBTS = () => {
-    fetch(`/api/lookup?id=883131348&entity=song&offset=${itemIndex}&limit=10`, {
-      mode:"cors",
-      headers: {
-        "Access-Control-Allow-Headers": "*",
-        "Access-Control-Allow-Origin": "https://itunes.apple.com/",
-        "Access-Control-Allow-Methods": "*" 
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
-        res["results"].shift();
-        setIsLoaded(true);
-        setItemIndex((i) => i + 10);
-        res["results"].forEach((value: MusicDataRequest) => {
-          data.push({artistName : value["artistName"], trackName: value["trackName"], artworkUrl: value["artworkUrl100"]});
-        });
-        setIsLoaded(false);
-      });
-  };
-
-  const onInterset: IntersectionObserverCallback = (
-    [entry],
-    observer,
-  ) => {
-    if (entry.isIntersecting && !isLoaded) {
-      observer.unobserve(entry.target);
+  const target = useRef<HTMLDivElement>(null);
+  let tempArray: MusicData[] = [];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if(!entry.isIntersecting) return;
+      if(isLoaded) return;
+      
       fetchBTS();
-      observer.observe(entry.target);
-    }
+    });
+  });
+
+  useEffect(() => observer.observe(target.current),[]);
+
+  const fetchBTS = () => {
+    setIsLoaded(true);
+    console.log(itemIndex.current);
+    axios.get(`/api/search?term=bts&entity=song&offset=${itemIndex.current}&limit=20`)
+      .then((response: AxiosResponse) => {
+        response.data["results"].shift();
+        response.data["results"].forEach((value: MusicDataRequest) => {
+          tempArray.push({artistName : value["artistName"], trackName: value["trackName"], artworkUrl: value["artworkUrl100"]});
+        });
+        itemIndex.current += 20;
+        setData((data) => data.concat(tempArray));
+        tempArray = [];
+      });
+    
+    setIsLoaded(false);
+    
   };
 
-  const { setTarget } = useIntersectionObserver({
-    root: null,
-    rootMargin: "0px",
-    threshold: 0.5,
-    onInterset,
-  });
+  
 
   return (
     <div>
-      {data.map((element: MusicData, index: number) => (
-        <CarouselCard key={index} props={element}/> 
-      ))}
-      <div ref={setTarget}>{isLoaded && <Spinner></Spinner>}</div>
+      <Row xs={1} md={2} lg={4} className="g-4">
+        {data.map((element: MusicData, index: number) => {
+          return (
+            <Col key={index}>
+              <CarouselCard key={index} props={element}/> 
+            </Col>
+          );
+        })}
+        {!isLoaded && ( <div ref={target}><Spinner></Spinner></div>)}
+      </Row>
+      
     </div>
   );
 }

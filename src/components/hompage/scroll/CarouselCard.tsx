@@ -15,7 +15,7 @@ function CarouselCard({props}: musicProps) {
   const { artistName, trackName, artworkUrl } = props;
 
   return (
-    <Card className={"mt-3"} style={{ width: "40%"}}>
+    <Card className={"mt-3"}>
       <Card.Img variant="top" src={artworkUrl}></Card.Img>
       <Card.Body style={{ backgroundColor: "#8840FF" }}>
         <Container fluid className="d-flex justify-content-between align-items-center" style={{ "display":"flex"}}>
