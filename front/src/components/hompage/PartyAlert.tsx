@@ -1,6 +1,8 @@
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { applyHost } from "../../api/star";
 
 function AlertApplication() {
+
   return (
     <Card className="bg-dark mt-3">
       <Card.Body>
@@ -11,7 +13,7 @@ function AlertApplication() {
               <h4 className="text-secondary">Be the first to host your artist party</h4>
             </Col>
           </Row>
-          <Button className="rounded-pill" style={{ backgroundColor: "#8840FF", height: "50%"}}>Apply now</Button>
+          <Button onClick={applyHost} className="rounded-pill" style={{ backgroundColor: "#8840FF", height: "50%"}}>Apply now</Button>
         </Container>
       </Card.Body>
     </Card>

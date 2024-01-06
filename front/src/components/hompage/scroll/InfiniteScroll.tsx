@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import CarouselCard from "./CarouselCard";
-import { Col, Row, Spinner } from "react-bootstrap";
+import { Col, Row, Spinner, Container } from "react-bootstrap";
 import axios, { AxiosResponse } from "axios";
 
 interface MusicDataRequest {
@@ -56,17 +56,18 @@ function InfiniteScroll() {
 
   return (
     <div>
-      <Row xs={1} md={2} lg={4} className="g-4">
-        {data.map((element: MusicData, index: number) => {
-          return (
-            <Col key={index}>
-              <CarouselCard key={index} props={element}/> 
-            </Col>
-          );
-        })}
-        {!isLoaded && ( <div ref={target}><Spinner></Spinner></div>)}
-      </Row>
-      
+      <Container fluid className="align-items-center">
+        <Row xs={1} md={2} lg={4} className="g-4">
+          {data.map((element: MusicData, index: number) => {
+            return (
+              <Col key={index}>
+                <CarouselCard key={index} props={element}/> 
+              </Col>
+            );
+          })}
+          {!isLoaded && ( <div ref={target}><Spinner></Spinner></div>)}
+        </Row>
+      </Container>
     </div>
   );
 }

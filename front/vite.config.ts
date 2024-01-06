@@ -10,6 +10,11 @@ export default defineConfig({
         target: "https://itunes.apple.com/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+      "/back": {
+        target: "http://localhost:3000/",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/back/, ""),
       }
     }
   }
