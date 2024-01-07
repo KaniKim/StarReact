@@ -34,16 +34,16 @@ app.post("/streaming/apply_host", (req, res) => {
 						image: {
 							id: 2345,
 							filename: "ATINY_logo.png",
-							thumb_url: "https://storeage.makestar.com/ATINY_logo.thumb.png",
+							thumb_url: "https://pbs.twimg.com/media/D6Wg222U8AAkWz7?format=jpg&name=large",
 							mime: 'PNG'
 						},
-						arist: {
+						artist: {
 							id: 56,
 							name: "ATEEZ",
 							image: {
 								id: 2345,
 								filename: "ATEEZ_main.png",
-								thumb_url: "https://storeage.makestar.com/ATEEZ_main.thumb.png",
+								thumb_url: "https://1000logos.net/wp-content/uploads/2022/03/Ateez-Logo.png",
 								mime: 'PNG'								
 							}
 						}
