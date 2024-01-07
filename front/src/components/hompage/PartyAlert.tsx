@@ -1,23 +1,53 @@
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { applyHost } from "../../api/star";
+import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
+import { RootState, useAppDispatch, useAppSelector } from "../../redux/store";
+import { apply_host } from "../../redux/applyHost";
+import { ThreeDots } from "react-bootstrap-icons";
 
 function AlertApplication() {
-
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state: RootState) => state.apply);    
+ 
   return (
-    <Card className="bg-dark mt-3">
-      <Card.Body>
-        <Container fluid className="d-flex justify-content-between align-items-center" style={{ "display":"flex"}}>
-          <Row>
-            <Col>
-              <h4 className="text-white">Host a party</h4>
-              <h4 className="text-secondary">Be the first to host your artist party</h4>
-            </Col>
-          </Row>
-          <Button onClick={applyHost} className="rounded-pill" style={{ backgroundColor: "#8840FF", height: "50%"}}>Apply now</Button>
-        </Container>
-      </Card.Body>
-    </Card>
+    <div>
+      {state.check === false && (
+        <Card className="bg-dark" style={{borderRadius: 0}}>
+          <Card.Body>
+            <Container fluid className="d-flex justify-content-between align-items-center">
+              <Row>
+                <Col>
+                  <h4 className="text-white">Host a Party</h4>
+                  <h4 className="text-secondary">Be the first to host your artist party</h4>
+                </Col>
+              </Row>
+              <Button onClick={() => dispatch(apply_host())} className="rounded-pill" style={{ backgroundColor: "#8840FF", height: "50%"}}>Apply now</Button>
+            </Container>
+          </Card.Body>
+        </Card>
+      )
+      }
+      {state.check === true && (
+        <Card className="bg-dark"  style={{borderRadius: 0}}>
+          <h1 className="text-white ms-2">Your party application</h1>
+          <Container fluid className="d-flex mt-3 mb-3">
+            <Image width="7%" src={state.data.external_data.member.fandom.artist.image.thumb_url} thumbnail></Image>
+            <Row className="ms-3">
+              <Col>
+                <h4 className="text-white">{state.data.external_data.member.fandom.artist.name}</h4>
+                <h4 className="text-secondary">{state.date.toString()}</h4>
+              </Col>
+            </Row>
+            <Row className="ms-auto">
+              <Container fluid className="d-flex align-items-center">
+                <Button onClick={() => dispatch(apply_host())} className="rounded-pill bg-black text-white">pending</Button>
+                <ThreeDots size={"30px"} className="ms-3 text-white"></ThreeDots>
+              </Container>
+            </Row>
+          </Container>
+        </Card>
+      )}
+    </div>
   );
+
 }
 
 export default AlertApplication;
