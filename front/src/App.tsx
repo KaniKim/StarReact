@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import BrandNav from "./components/hompage/NavBar";
 import AlertApplication from "./components/hompage/PartyAlert";
 import InfiniteScroll from "./components/hompage/scroll/InfiniteScroll";
@@ -12,7 +12,7 @@ function App() {
         <Row>
           <AlertApplication></AlertApplication>
         </Row>
-        <Row className="">
+        <Row>
           <InfiniteScroll></InfiniteScroll>
         </Row>
       </div>
