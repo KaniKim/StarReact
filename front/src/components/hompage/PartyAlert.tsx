@@ -2,10 +2,23 @@ import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
 import { RootState, useAppDispatch, useAppSelector } from "../../redux/store";
 import { apply_host } from "../../redux/applyHost";
 import { ThreeDots } from "react-bootstrap-icons";
+import { toast } from "react-toastify";
 
 function AlertApplication() {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state: RootState) => state.apply);    
+  const notify = () => toast.success("Application Complete", {
+    autoClose: 3000,
+    hideProgressBar: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
+  
+  function multipleFunc() {
+    dispatch(apply_host());
+    notify();
+  }
  
   return (
     <div>
@@ -19,7 +32,7 @@ function AlertApplication() {
                   <h4 className="text-secondary">Be the first to host your artist party</h4>
                 </Col>
               </Row>
-              <Button onClick={() => dispatch(apply_host())} className="rounded-pill" style={{ backgroundColor: "#8840FF", height: "50%"}}>Apply now</Button>
+              <Button onClick={() => {multipleFunc();}} className="rounded-pill" style={{ backgroundColor: "#8840FF", height: "50%"}}>Apply now</Button>
             </Container>
           </Card.Body>
         </Card>
