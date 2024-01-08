@@ -3,7 +3,12 @@
 }
 
 .modal-body {
+    border-radius: 30px !important; 
     height: 300px
+}
+
+.modal-content {
+    border-radius: 40px; 
 }
 
 .modal .modal-dialog{  
@@ -14,6 +19,10 @@
     width: 50%;
     margin-left: -25%;
 }
+
+.btn-primary:hover {
+    background-color: gray !important;
+ }
 
 .modal.fade .modal-dialog {
     -webkit-transform: translate(0,100%);

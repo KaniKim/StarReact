@@ -25,7 +25,7 @@ function AlertApplication() {
   return (
     <div>
       {state.check === false && (
-        <Card className="bg-dark" style={{borderRadius: 0}}>
+        <Card className="bg-black" style={{borderRadius: 0}}>
           <Card.Body>
             <Container fluid className="d-flex justify-content-between align-items-center">
               <Row>
@@ -41,7 +41,7 @@ function AlertApplication() {
       )
       }
       {state.check === true && (
-        <Card className="bg-dark"  style={{borderRadius: 0}}>
+        <Card className="bg-black"  style={{borderRadius: 0}}>
           <h1 className="text-white ms-2">Your party application</h1>
           <Container fluid className="d-flex mt-3 mb-3">
             <Image width="75px" src={state.data.external_data.member.fandom.artist.image.thumb_url} thumbnail></Image>
@@ -53,7 +53,7 @@ function AlertApplication() {
             </Row>
             <Row className="ms-auto">
               <Container fluid className="d-flex align-items-center">
-                <Button onClick={() => dispatch(cancelToTrue(true))} className="rounded-pill bg-black text-white">pending</Button>
+                <Button onClick={() => dispatch(cancelToTrue(true))} className="rounded-pill bg-black text-white border-0 btn-primary">pending</Button>
                 <ThreeDots size={"30px"} className="ms-3 text-white"></ThreeDots>
               </Container>
             </Row>

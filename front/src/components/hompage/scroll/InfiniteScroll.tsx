@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import CarouselCard from "./CarouselCard";
 import { Col, Row, Spinner, Container } from "react-bootstrap";
 import axios, { AxiosResponse } from "axios";
+import { useAppSelector } from "../../../redux/store";
 
 interface MusicDataRequest {
     artistName: string;
@@ -22,6 +23,8 @@ function InfiniteScroll() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [data, setData] = useState<MusicData[]>([]);
   const target = useRef<HTMLDivElement>(null);
+  const check = useAppSelector(state => state.apply.check);
+
   let tempArray: MusicData[] = [];
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -56,6 +59,7 @@ function InfiniteScroll() {
 
   return (
     <div>
+      {check === true && (<h1 className="ms-3 mb-3" style={{color: "white", fontWeight: "bold"}}>NOW ON AIR</h1>)}
       <Container fluid className="align-items-center">
         <Row xs={1} md={2} lg={4} className="g-4">
           {data.map((element: MusicData, index: number) => {

@@ -7,7 +7,7 @@ import PopupModal from "./components/hompage/QuitPop";
 
 function App() {
   return (
-    <>
+    <div className="bg-black">
       <BrandNav></BrandNav>
       <div className="d-grid gap-5">
         <Row>
@@ -19,7 +19,7 @@ function App() {
       </div>
       <PopupModal></PopupModal>
       <ToastContainer position="bottom-center"/>
-    </>
+    </div>
   );
 }
 

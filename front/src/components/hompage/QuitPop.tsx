@@ -12,8 +12,8 @@ function PopupModal() {
     >
       <Modal.Body className="bg-black" >
         <div className="d-grid gap-2">
-          <Button className="bg-black" >Quit a host</Button>
-          <Button className="bg-black" onClick={() => dispatch(cancelToFalse(false))}>Close</Button>
+          <Button id="col" className="bg-black border-0 btn-primary" style={{}}>Quit a host</Button>
+          <Button className="bg-black border-0 btn-primary" onClick={() => dispatch(cancelToFalse(false))}>Close</Button>
         </div>
       </Modal.Body>
     </Modal>
