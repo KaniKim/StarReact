@@ -3,6 +3,7 @@ import { RootState, useAppDispatch, useAppSelector } from "../../redux/store";
 import { apply_host } from "../../redux/applyHost";
 import { ThreeDots } from "react-bootstrap-icons";
 import { toast } from "react-toastify";
+import { cancelToTrue } from "../../redux/quitApply";
 
 function AlertApplication() {
   const dispatch = useAppDispatch();
@@ -13,6 +14,7 @@ function AlertApplication() {
     draggable: true,
     progress: undefined,
     theme: "light",
+    closeButton: false,
   });
   
   function multipleFunc() {
@@ -42,7 +44,7 @@ function AlertApplication() {
         <Card className="bg-dark"  style={{borderRadius: 0}}>
           <h1 className="text-white ms-2">Your party application</h1>
           <Container fluid className="d-flex mt-3 mb-3">
-            <Image width="7%" src={state.data.external_data.member.fandom.artist.image.thumb_url} thumbnail></Image>
+            <Image width="75px" src={state.data.external_data.member.fandom.artist.image.thumb_url} thumbnail></Image>
             <Row className="ms-3">
               <Col>
                 <h4 className="text-white">{state.data.external_data.member.fandom.artist.name}</h4>
@@ -51,7 +53,7 @@ function AlertApplication() {
             </Row>
             <Row className="ms-auto">
               <Container fluid className="d-flex align-items-center">
-                <Button onClick={() => dispatch(apply_host())} className="rounded-pill bg-black text-white">pending</Button>
+                <Button onClick={() => dispatch(cancelToTrue(true))} className="rounded-pill bg-black text-white">pending</Button>
                 <ThreeDots size={"30px"} className="ms-3 text-white"></ThreeDots>
               </Container>
             </Row>

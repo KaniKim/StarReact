@@ -1,3 +1,27 @@
 .Toastify__toast {
-    border-radius: 20px; 
+    border-radius: 30px; 
+}
+
+.modal-body {
+    height: 300px
+}
+
+.modal .modal-dialog{  
+    position: fixed;
+    bottom: 0;
+    margin-bottom: -170px;
+    left: 50%;
+    width: 50%;
+    margin-left: -25%;
+}
+
+.modal.fade .modal-dialog {
+    -webkit-transform: translate(0,100%);
+    -ms-transform: translate(0,100%);
+    -o-transform: translate(0,100%);
+    transform: translate(0,100%);
+}
+
+.modal.show .modal-dialog {
+    transform: translate3d(0, 0, 0);
 }

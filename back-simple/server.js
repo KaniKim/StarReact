@@ -3,6 +3,16 @@ const express = require("express");
 
 const app = express();
 
+app.get("/streaming/cancel_host_apply", (req, res) => {
+	res.send(
+		{
+			result: true,
+			message: "Your Application is cancelled.",
+			code: ""
+		}
+	)
+}) 
+
 app.post("/streaming/apply_host", (req, res) => {
     res.send(
         {
