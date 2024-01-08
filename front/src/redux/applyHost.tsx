@@ -33,7 +33,11 @@ export const apply_host = createAsyncThunk<HostAttributes>("apply/post", async (
 export const applySlice = createSlice({
   name: "apply",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    resetApplyState: (state) => {
+      Object.assign(state, initialState);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(apply_host.pending, (state) => {
@@ -54,3 +58,4 @@ export const applySlice = createSlice({
 });
 
 export default applySlice.reducer;
+export const { resetApplyState } = applySlice.actions; 

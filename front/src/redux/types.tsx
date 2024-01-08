@@ -91,6 +91,7 @@ export interface ApplyState {
     date: string
     error: string | undefined
 }
+
 export const initialState: ApplyState = {
   loading: false,
   check: false,
