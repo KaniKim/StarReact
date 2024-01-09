@@ -1,21 +1,21 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
+import { cancel_host } from "../api/fetch";
 
 export interface cancelState {
-    loading: boolean
-    cancel: boolean
-    data: {
-        result: boolean
-        message: string
-        code: string
-    }
-    error: string | undefined
+  loading: boolean;
+  cancel: boolean;
+  data: {
+    result: boolean;
+    message: string;
+    code: string;
+  };
+  error: string | undefined;
 }
 
 export interface HostAttributes {
-    result: boolean
-    message: string
-    code: string
+  result: boolean;
+  message: string;
+  code: string;
 }
 
 const initialState: cancelState = {
@@ -24,23 +24,10 @@ const initialState: cancelState = {
   data: {
     result: false,
     message: "",
-    code: ""
+    code: "",
   },
-  error: ""
+  error: "",
 };
-
-export const cancel_host = createAsyncThunk<HostAttributes>("apply/post", async (_, {rejectWithValue}) => {
-  try {
-    const response = await axios.patch("/back/streaming/cancel_host_apply", {
-      request_id: 256
-    });
-    return response.data;
-  } catch (err) {
-    if (axios.isAxiosError(err)) {
-      return rejectWithValue({errorMessage: err.response?.data});
-    }
-  }
-});
 
 export const quitSlice = createSlice({
   name: "quit",
@@ -51,7 +38,7 @@ export const quitSlice = createSlice({
     },
     cancelToFalse: (state, action) => {
       state.cancel = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -66,7 +53,7 @@ export const quitSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       });
-  }  
+  },
 });
 export const { cancelToFalse, cancelToTrue } = quitSlice.actions;
 export default quitSlice.reducer;

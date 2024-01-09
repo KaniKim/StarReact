@@ -49,5 +49,6 @@ module.exports = {
       "error",
       "always"
     ]
-  }
+  },
+  extends: ["prettier"]
 };
